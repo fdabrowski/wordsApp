@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Kategoria */
 
 $this->title = $model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Kategorias', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Kategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kategoria-view">

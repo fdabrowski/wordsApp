@@ -8,6 +8,7 @@ use common\models\PodkategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
 
 /**
  * PodkategoriaController implements the CRUD actions for Podkategoria model.
@@ -51,8 +52,31 @@ class PodkategoriaController extends Controller
      */
     public function actionView($id)
     {
+        $totalCount = Yii::$app->db->createCommand('SELECT COUNT(*) FROM zestaw WHERE podkategoria_id='.$id, [':podkategoria_id' => 1])
+			->queryScalar();
+
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => 'SELECT * FROM zestaw WHERE podkategoria_id='.$id,
+            'params' => [':id' => 1],
+            'totalCount' => $totalCount,
+            'sort' => [
+                'attributes' => [
+                    'name' => [
+                        'asc' => ['name' => SORT_ASC],
+                        'desc' => ['name' => SORT_DESC],
+                        'label' => 'Name',
+                    ],
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 

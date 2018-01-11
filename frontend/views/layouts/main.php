@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -70,7 +71,7 @@ AppAsset::register($this);
 </div>
 
 <footer class="footer">
-    
+
 </footer>
 
 <?php $this->endBody() ?>

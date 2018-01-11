@@ -115,3 +115,6 @@ INSERT INTO rola(nazwa,opis) values('Użytkownik zarejestrowany','-');
 INSERT INTO rola(nazwa,opis) values('Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Super Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Administrator','-');
+
+INSERT INTO zestaw(podkategoria_id, nazwa, zestaw, ilosc_slowek) values(1, 'Zestaw 1', 'widelec;fork nóż;knife szuflada;drawer piekarnik;cooker miska;bowl', 5);
+INSERT INTO zestaw(podkategoria_id, nazwa, zestaw, ilosc_slowek) values(1, 'Zestaw 2', 'lodówka;fridge zlew;sink półka;shelf łyżka;spoon zamrażarka;freezer', 5);
