@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\PodkategoriaSearch */
+/* @var $searchModel common\models\PodkategoriaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Podkategorias';
+$this->title = 'Podkategorie';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="podkategoria-index">
@@ -24,11 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'kategoria_id',
+            //'id',
+            //'kategoria_id',
             'nazwa',
-            'opis:ntext',
-            'obrazek',
+            //'opis:ntext',
+            //'obrazek',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

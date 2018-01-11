@@ -8,9 +8,18 @@ $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Word App</h1>
+    <p>Naucz się z nami angielskiego! Aby uzyskać dostępo do większej ilości podkategorii zaloguj się w zakładce "Login"</p>
+        <?= Html::a('Kraje', ['country/index'],
+        ['class' => 'btn btn-info']) ?>
 
-    <p>This is the About page. You may modify the following file to customize its content:</p>
+    <?= Html::a('Owoce', ['fruits/index'],
+        ['class' => 'btn btn-info']) ?>
 
-    <code><?= __FILE__ ?></code>
+    <?= Html::a('Zamówienia', ['orders/index'],
+        ['class' => 'btn btn-info']) ?>
+
+    <?= Html::a('Sprzedawcy', ['sellers/index'],
+        ['class' => 'btn btn-info']) ?>
+    
 </div>

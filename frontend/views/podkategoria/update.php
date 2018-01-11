@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Podkategoria */
+/* @var $model common\models\Podkategoria */
 
 $this->title = 'Update Podkategoria: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Podkategorias', 'url' => ['index']];

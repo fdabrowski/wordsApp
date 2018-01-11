@@ -103,6 +103,3 @@ INSERT INTO rola(nazwa,opis) values('Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Super Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Administrator','-');
 
-
-
-
