@@ -13,6 +13,9 @@ use common\models\ResetPasswordForm;
 use common\models\SignupForm;
 use common\models\ContactForm;
 
+use common\models\Kategoria;
+use common\models\KategoriaSearch;
+
 /**
  * Site controller
  */
@@ -72,7 +75,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $searchModel = new KategoriaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
