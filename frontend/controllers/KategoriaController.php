@@ -8,6 +8,11 @@ use common\models\KategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
+
+
+use common\models\Podkategoria;
+use common\models\PodkategoriaSearch;
 
 /**
  * KategoriaController implements the CRUD actions for Kategoria model.
@@ -50,8 +55,33 @@ class KategoriaController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new PodkategoriaSearch();
+
+        $totalCount = Yii::$app->db->createCommand('SELECT COUNT(*) FROM podkategoria WHERE kategoria_id='.$id, [':kategoria_id' => 1])
+			->queryScalar();
+
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => 'SELECT * FROM podkategoria WHERE kategoria_id='.$id,
+            'params' => [':id' => 1],
+            'totalCount' => $totalCount,
+            'sort' => [
+                'attributes' => [
+                    'name' => [
+                        'asc' => ['name' => SORT_ASC],
+                        'desc' => ['name' => SORT_DESC],
+                        'label' => 'Name',
+                    ],
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 
