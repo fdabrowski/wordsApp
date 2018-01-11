@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Podkategoria */
+/* @var $model common\models\Podkategoria */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Podkategorias', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Podkategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="podkategoria-view">
