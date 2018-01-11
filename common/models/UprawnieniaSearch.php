@@ -1,14 +1,14 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Uprawnienia;
+use common\models\Uprawnienia;
 
 /**
- * UprawnieniaSearch represents the model behind the search form about `backend\models\Uprawnienia`.
+ * UprawnieniaSearch represents the model behind the search form about `common\models\Uprawnienia`.
  */
 class UprawnieniaSearch extends Uprawnienia
 {

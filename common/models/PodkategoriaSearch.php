@@ -1,14 +1,14 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Podkategoria;
+use common\models\Podkategoria;
 
 /**
- * PodkategoriaSearch represents the model behind the search form about `backend\models\Podkategoria`.
+ * PodkategoriaSearch represents the model behind the search form about `common\models\Podkategoria`.
  */
 class PodkategoriaSearch extends Podkategoria
 {

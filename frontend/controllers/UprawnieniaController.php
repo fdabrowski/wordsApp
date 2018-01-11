@@ -1,10 +1,10 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use backend\models\Uprawnienia;
-use backend\models\UprawnieniaSearch;
+use common\models\Uprawnienia;
+use common\models\UprawnieniaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

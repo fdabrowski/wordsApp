@@ -1,4 +1,17 @@
-DROP TABLE zestaw, wynik, uprawnienia, rola, podkategoria, konto, kategoria, jezyk;
+DROP TABLE user, zestaw, wynik, uprawnienia, rola, podkategoria, konto, kategoria, jezyk;
+
+CREATE TABLE user (
+    id SERIAL NOT NULL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password_hash VARCHAR(50) NOT NULL,
+    password_reset_token VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    auth_key VARCHAR(50) NOT NULL,
+    status INTEGER,
+    created_at INTEGER,
+    updated_at INTEGER,
+    password VARCHAR(50) NOT NULL
+);
 
 CREATE TABLE jezyk (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -102,7 +115,3 @@ INSERT INTO rola(nazwa,opis) values('Użytkownik zarejestrowany','-');
 INSERT INTO rola(nazwa,opis) values('Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Super Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Administrator','-');
-
-
-
-
