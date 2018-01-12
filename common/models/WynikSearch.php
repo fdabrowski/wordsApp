@@ -18,7 +18,7 @@ class WynikSearch extends Wynik
     public function rules()
     {
         return [
-            [['id', 'konto_id', 'zestaw_id', 'wynik'], 'integer'],
+            [['id', 'user_id', 'zestaw_id', 'wynik'], 'integer'],
             [['data_wyniku'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class WynikSearch extends Wynik
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'konto_id' => $this->konto_id,
+            'user_id' => $this->user_id,
             'zestaw_id' => $this->zestaw_id,
             'data_wyniku' => $this->data_wyniku,
             'wynik' => $this->wynik,

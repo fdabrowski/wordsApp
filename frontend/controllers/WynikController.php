@@ -63,15 +63,23 @@ class WynikController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Wynik();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        $userId = Yii::$app->request->getBodyParam('user_id');
+        $zestawId = Yii::$app->request->getBodyParam('zestaw_id');
+        $dataWyniku = Yii::$app->request->getBodyParam('data_wyniku');
+        $wynik = Yii::$app->request->getBodyParam('wynik');
+
+        Yii::$app->db->createCommand('insert into wynik(user_id, zestaw_id, data_wyniku, wynik) values ("'.$userId.'","'.$zestawId.'","'.$dataWyniku.'","'.$wynik.'") ')->query();
+
+        // $model = new Wynik();
+        //
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // } else {
+        //     return $this->render('create', [
+        //         'model' => $model,
+        //     ]);
+        // }
     }
 
     /**

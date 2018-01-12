@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "wynik".
  *
  * @property string $id
- * @property integer $konto_id
+ * @property integer $user_id
  * @property integer $zestaw_id
  * @property string $data_wyniku
  * @property integer $wynik
@@ -29,8 +29,8 @@ class Wynik extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['konto_id', 'zestaw_id', 'data_wyniku', 'wynik'], 'required'],
-            [['konto_id', 'zestaw_id', 'wynik'], 'integer'],
+            [['user_id', 'zestaw_id', 'data_wyniku', 'wynik'], 'required'],
+            [['user_id', 'zestaw_id', 'wynik'], 'integer'],
             [['data_wyniku'], 'safe'],
         ];
     }
@@ -42,7 +42,7 @@ class Wynik extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'konto_id' => 'Konto ID',
+            'user_id' => 'Konto ID',
             'zestaw_id' => 'Zestaw ID',
             'data_wyniku' => 'Data Wyniku',
             'wynik' => 'Wynik',

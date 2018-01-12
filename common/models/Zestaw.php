@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "zestaw".
  *
  * @property string $id
- * @property integer $konto_id
+ * @property integer $user_id
  * @property integer $jezyk1_id
  * @property integer $jezyk2_id
  * @property integer $podkategoria_id
@@ -34,8 +34,8 @@ class Zestaw extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'nazwa', 'zestaw', 'ilosc_slowek', 'data_dodania'], 'required'],
-            [['konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
+            [['user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'nazwa', 'zestaw', 'ilosc_slowek', 'data_dodania'], 'required'],
+            [['user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
             [['zestaw'], 'string'],
             [['data_dodania', 'data_edycji'], 'safe'],
             [['nazwa'], 'string', 'max' => 200],
@@ -49,7 +49,7 @@ class Zestaw extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'konto_id' => 'Konto ID',
+            'user_id' => 'Konto ID',
             'jezyk1_id' => 'Jezyk1 ID',
             'jezyk2_id' => 'Jezyk2 ID',
             'podkategoria_id' => 'Podkategoria ID',

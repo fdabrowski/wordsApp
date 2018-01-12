@@ -18,7 +18,7 @@ class ZestawikSearch extends Zestaw
     public function rules()
     {
         return [
-            [['id', 'konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
+            [['id', 'user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
             [['nazwa', 'zestaw', 'data_dodania', 'data_edycji'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class ZestawikSearch extends Zestaw
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'konto_id' => $this->konto_id,
+            'user_id' => $this->user_id,
             'jezyk1_id' => $this->jezyk1_id,
             'jezyk2_id' => $this->jezyk2_id,
             'podkategoria_id' => $this->podkategoria_id,

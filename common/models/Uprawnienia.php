@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "uprawnienia".
  *
- * @property integer $konto_id
+ * @property integer $user_id
  * @property integer $podkategoria_id
  */
 class Uprawnienia extends \yii\db\ActiveRecord
@@ -26,8 +26,8 @@ class Uprawnienia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['konto_id', 'podkategoria_id'], 'required'],
-            [['konto_id', 'podkategoria_id'], 'integer'],
+            [['user_id', 'podkategoria_id'], 'required'],
+            [['user_id', 'podkategoria_id'], 'integer'],
         ];
     }
 
@@ -37,7 +37,7 @@ class Uprawnienia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'konto_id' => 'Konto ID',
+            'user_id' => 'Konto ID',
             'podkategoria_id' => 'Podkategoria ID',
         ];
     }

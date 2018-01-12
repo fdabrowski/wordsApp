@@ -1,16 +1,17 @@
 DROP TABLE user, zestaw, wynik, uprawnienia, rola, podkategoria, konto, kategoria, jezyk;
 
-CREATE TABLE user (
-    id SERIAL NOT NULL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password_hash VARCHAR(50) NOT NULL,
-    password_reset_token VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    auth_key VARCHAR(50) NOT NULL,
-    status INTEGER,
-    created_at INTEGER,
-    updated_at INTEGER,
-    password VARCHAR(50) NOT NULL
+CREATE TABLE IF NOT EXISTS user (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(255) NOT NULL,
+  auth_key varchar(32) NOT NULL,
+  password_hash varchar(255) NOT NULL,
+  password_reset_token varchar(255) NOT NULL,
+  email varchar(100) NOT NULL,
+  status smallint(10) NOT NULL,
+  role int(11) NOT NULL,
+  created_at int(11) NOT NULL,
+  updated_at int(11) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE jezyk (
@@ -50,14 +51,14 @@ CREATE TABLE rola (
 );
 
 CREATE TABLE uprawnienia (
-  konto_id INTEGER NOT NULL REFERENCES konto(id),
+  user_id INTEGER NOT NULL REFERENCES konto(id),
   podkategoria_id INTEGER NOT NULL REFERENCES podkategoria(id),
-  PRIMARY KEY(konto_id, podkategoria_id)
+  PRIMARY KEY(user_id, podkategoria_id)
 );
 
 CREATE TABLE wynik (
   id SERIAL NOT NULL PRIMARY KEY,
-  konto_id INTEGER NOT NULL REFERENCES konto(id),
+  user_id INTEGER NOT NULL REFERENCES user(id),
   zestaw_id INTEGER NOT NULL REFERENCES zestaw(id),
   data_wyniku DATE NOT NULL,
   wynik INTEGER NOT NULL
@@ -65,7 +66,7 @@ CREATE TABLE wynik (
 
 CREATE TABLE zestaw (
   id SERIAL NOT NULL,
-  konto_id INTEGER NOT NULL REFERENCES konto(id),
+  user_id INTEGER NOT NULL REFERENCES konto(id),
   jezyk1_id INTEGER NOT NULL REFERENCES jezyk(id),
   jezyk2_id INTEGER NOT NULL REFERENCES jezyk(id),
   podkategoria_id INTEGER NOT NULL REFERENCES podkategoria(id),
