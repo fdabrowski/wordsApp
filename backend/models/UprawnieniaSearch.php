@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Uprawnienia;
 
 /**
- * UprawnieniaSearch represents the model behind the search form about `backend\models\Uprawnienia`.
+ * UprawnieniaSearch represents the model behind the search form of `backend\models\Uprawnienia`.
  */
 class UprawnieniaSearch extends Uprawnienia
 {

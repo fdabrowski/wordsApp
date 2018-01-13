@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Kategoria */
 
-$this->title = 'Update Kategoria: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Kategorias', 'url' => ['index']];
+$this->title = 'Zmień Kategorię: ' . $model->nazwa;
+$this->params['breadcrumbs'][] = ['label' => 'Kategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Zmień';
 ?>
 <div class="kategoria-update">
 

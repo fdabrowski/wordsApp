@@ -10,7 +10,7 @@ use common\models\Zestaw;
 /**
  * ZestawikSearch represents the model behind the search form about `common\models\Zestaw`.
  */
-class ZestawikSearch extends Zestaw
+class ZestawSearch extends Zestaw
 {
     /**
      * @inheritdoc

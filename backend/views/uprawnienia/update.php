@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Uprawnienia */
 
-$this->title = 'Update Uprawnienia: ' . $model->user_id;
-$this->params['breadcrumbs'][] = ['label' => 'Uprawnienias', 'url' => ['index']];
+$this->title = 'Zmień Uprawnienia: {nameAttribute}';
+$this->params['breadcrumbs'][] = ['label' => 'Uprawnienia', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->user_id, 'url' => ['view', 'user_id' => $model->user_id, 'podkategoria_id' => $model->podkategoria_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

@@ -7,18 +7,17 @@ use yii\widgets\ActiveForm;
 /* @var $model backend\models\Zestaw */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
 <div class="zestaw-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'user_id')->dropDownList( $users) ?>
 
-    <?= $form->field($model, 'jezyk1_id')->textInput() ?>
+    <?= $form->field($model, 'jezyk1_id')->dropDownList( $jezyk1) ?>
 
-    <?= $form->field($model, 'jezyk2_id')->textInput() ?>
+    <?= $form->field($model, 'jezyk2_id')->dropDownList( $jezyk2) ?>
 
-    <?= $form->field($model, 'podkategoria_id')->textInput() ?>
+    <?= $form->field($model, 'podkategoria_id')->dropDownList( $podkategorie) ?>
 
     <?= $form->field($model, 'nazwa')->textInput(['maxlength' => true]) ?>
 
@@ -26,12 +25,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ilosc_slowek')->textInput() ?>
 
-    <?= $form->field($model, 'data_dodania')->textInput() ?>
+    <?= $form->field($model, 'data_dodania')->textInput(['type' => 'date']) ?>
 
-    <?= $form->field($model, 'data_edycji')->textInput() ?>
+    <?= $form->field($model, 'data_edycji')->textInput(['type' => 'date']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Dodaj' : 'Zmień', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

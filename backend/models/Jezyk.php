@@ -9,6 +9,9 @@ use Yii;
  *
  * @property string $id
  * @property string $nazwa
+ *
+ * @property Zestaw[] $zestaws
+ * @property Zestaw[] $zestaws0
  */
 class Jezyk extends \yii\db\ActiveRecord
 {
@@ -40,5 +43,21 @@ class Jezyk extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nazwa' => 'Nazwa',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getZestaws()
+    {
+        return $this->hasMany(Zestaw::className(), ['jezyk1_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getZestaws0()
+    {
+        return $this->hasMany(Zestaw::className(), ['jezyk2_id' => 'id']);
     }
 }

@@ -1,6 +1,76 @@
-DROP TABLE user, zestaw, wynik, uprawnienia, rola, podkategoria, konto, kategoria, jezyk;
+CREATE TABLE user (
+    id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    password_hash VARCHAR(50) NOT NULL,
+    password_reset_token VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    auth_key VARCHAR(50) NOT NULL,
+    status INTEGER,
+    created_at INTEGER,
+    updated_at INTEGER,
+    password VARCHAR(50) NOT NULL,
+	PRIMARY KEY(id)
+);
 
-CREATE TABLE IF NOT EXISTS user (
+CREATE TABLE jezyk (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nazwa VARCHAR(50) NOT NULL,
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE kategoria  (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nazwa VARCHAR(50) NOT NULL,
+  opis TEXT NOT NULL,
+  obrazek BLOB NULL,
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE podkategoria (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  kategoria_id INTEGER UNSIGNED NOT NULL ,
+  nazwa VARCHAR(50) NOT NULL,
+  opis TEXT NOT NULL,
+  obrazek BLOB NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (kategoria_id) REFERENCES kategoria(id)
+);
+
+CREATE TABLE rola (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nazwa VARCHAR(50) NOT NULL,
+  opis VARCHAR(300) NOT NULL,
+  PRIMARY KEY(id)
+);
+
+-- CREATE TABLE konto (
+--   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+--   rola_id INTEGER UNSIGNED NOT NULL,
+--   imie VARCHAR(20) NOT NULL,
+--   nazwisko VARCHAR(30) NOT NULL,
+--   email VARCHAR(50) NOT NULL,
+--   login VARCHAR(50) NOT NULL,
+--   haslo VARCHAR(50) NOT NULL,
+--   PRIMARY KEY(id),
+--   FOREIGN KEY (rola_id) REFERENCES rola(id)
+-- );
+
+
+CREATE TABLE uprawnienia (
+  konto_id INTEGER NOT NULL,
+  podkategoria_id INTEGER NOT NULL,
+  PRIMARY KEY(konto_id, podkategoria_id)
+);
+
+CREATE TABLE uprawnienia (
+  user_id INTEGER UNSIGNED NOT NULL,
+  podkategoria_id INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(user_id, podkategoria_id),
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY (podkategoria_id) REFERENCES podkategoria(id)
+);
+
+CREATE TABLE IF NOT EXISTS `user` (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(255) NOT NULL,
   auth_key varchar(32) NOT NULL,
@@ -8,81 +78,47 @@ CREATE TABLE IF NOT EXISTS user (
   password_reset_token varchar(255) NOT NULL,
   email varchar(100) NOT NULL,
   status smallint(10) NOT NULL,
-  role int(11) NOT NULL,
+  'role' int(11) NOT NULL,
   created_at int(11) NOT NULL,
   updated_at int(11) NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE jezyk (
-  id SERIAL NOT NULL PRIMARY KEY,
-  nazwa VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE kategoria  (
-  id SERIAL NOT NULL PRIMARY KEY,
-  nazwa VARCHAR(50) NOT NULL,
-  opis TEXT NOT NULL,
-  obrazek BLOB NULL
-);
-
-CREATE TABLE podkategoria (
-  id SERIAL NOT NULL PRIMARY KEY,
-  kategoria_id INTEGER NOT NULL REFERENCES kategoria(id),
-  nazwa VARCHAR(50) NOT NULL,
-  opis TEXT NOT NULL,
-  obrazek BLOB NULL
-);
-
-CREATE TABLE konto (
-  id SERIAL NOT NULL PRIMARY KEY,
-  rola_id INTEGER NOT NULL REFERENCES rola(id),
-  imie VARCHAR(20) NOT NULL,
-  nazwisko VARCHAR(30) NOT NULL,
-  email VARCHAR(50) NOT NULL,
-  login VARCHAR(50) NOT NULL,
-  haslo VARCHAR(50) NOT NULL
-  FOREIGN KEY (rola_id) REFERENCES rola(rola_id)
-);
-
-CREATE TABLE rola (
-  id UNSIGNED NOT NULL AUTO_INCREMENT,
-  nazwa VARCHAR(50) NOT NULL,
-  opis VARCHAR(300) NOT NULL,
-  PRIMARY KEY(id)
-);
-
-CREATE TABLE uprawnienia (
-  user_id INTEGER NOT NULL REFERENCES user(id),
-  podkategoria_id INTEGER NOT NULL REFERENCES podkategoria(id),
-  PRIMARY KEY(user_id, podkategoria_id)
-);
-
-CREATE TABLE wynik (
-  id SERIAL NOT NULL PRIMARY KEY,
-  user_id INTEGER NOT NULL REFERENCES user(id),
-  zestaw_id INTEGER NOT NULL REFERENCES zestaw(id),
-  data_wyniku DATE NOT NULL,
-  wynik INTEGER NOT NULL
+  PRIMARY KEY (id),
+  FOREIGN KEY (role) REFERENCES rola(id)
 );
 
 CREATE TABLE zestaw (
-  id SERIAL NOT NULL,
-  user_id INTEGER NOT NULL REFERENCES konto(id),
-  jezyk1_id INTEGER NOT NULL REFERENCES jezyk(id),
-  jezyk2_id INTEGER NOT NULL REFERENCES jezyk(id),
-  podkategoria_id INTEGER NOT NULL REFERENCES podkategoria(id),
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INTEGER UNSIGNED NOT NULL,
+  jezyk1_id INTEGER UNSIGNED NOT NULL,
+  jezyk2_id INTEGER UNSIGNED NOT NULL,
+  podkategoria_id INTEGER UNSIGNED NOT NULL,
   nazwa VARCHAR(200) NOT NULL,
   zestaw TEXT NOT NULL,
   ilosc_slowek INTEGER NOT NULL,
   data_dodania DATE NOT NULL,
-  data_edycji DATE NULL
+  data_edycji DATE NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (user_id) REFERENCES `user`(id),
+  FOREIGN KEY (jezyk1_id) REFERENCES jezyk(id),
+  FOREIGN KEY (jezyk2_id) REFERENCES jezyk(id),
+  FOREIGN KEY (podkategoria_id) REFERENCES podkategoria(id)
 );
+
+CREATE TABLE wynik (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INTEGER UNSIGNED NOT NULL ,
+  zestaw_id INTEGER UNSIGNED NOT NULL ,
+  data_wyniku DATE NOT NULL,
+  wynik INTEGER NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (user_id) REFERENCES `user`(id),
+  FOREIGN KEY (zestaw_id) REFERENCES zestaw(id)
+);
+
+
 
 alter table jezyk convert to character set utf8 COLLATE utf8_polish_ci;
 alter table kategoria convert to character set utf8 COLLATE utf8_polish_ci;
 alter table podkategoria convert to character set utf8 COLLATE utf8_polish_ci;
-alter table konto convert to character set utf8 COLLATE utf8_polish_ci;
 alter table rola convert to character set utf8 COLLATE utf8_polish_ci;
 alter table uprawnienia convert to character set utf8 COLLATE utf8_polish_ci;
 alter table wynik convert to character set utf8 COLLATE utf8_polish_ci;
@@ -112,31 +148,15 @@ INSERT INTO podkategoria(kategoria_id,nazwa,opis,obrazek) VALUES(4,'Nieprzyjemna
 INSERT INTO podkategoria(kategoria_id,nazwa,opis,obrazek) VALUES(4,'Klęski żywiołowe','Opis przedmiotów zwiazanych z konkretnym pomieszczeniem','pomieszczenia.jpg');
 
 INSERT INTO jezyk(nazwa) values('polski');
-INSERT INTO jezyk(nazwa) values('polski');
+INSERT INTO jezyk(nazwa) values('angielski');
 
 INSERT INTO rola(nazwa,opis) values('Użytkownik zarejestrowany','-');
 INSERT INTO rola(nazwa,opis) values('Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Super Redaktor','-');
 INSERT INTO rola(nazwa,opis) values('Administrator','-');
 
-INSERT INTO zestaw(podkategoria_id, nazwa, zestaw, ilosc_slowek) values(1, 'Zestaw 1', 'widelec;fork nóż;knife szuflada;drawer piekarnik;cooker miska;bowl', 5);
-INSERT INTO zestaw(podkategoria_id, nazwa, zestaw, ilosc_slowek) values(1, 'Zestaw 2', 'lodówka;fridge zlew;sink półka;shelf łyżka;spoon zamrażarka;freezer', 5);
-
-INSERT INTO zestaw(konto_id, jezyk1_id, jezyk2_id, podkategoria_id, nazwa, zestaw, ilosc_slowek, data_dodania, data_edycji) VALUES ('1','1','2','1','kolory','blue;niebieski czerwony;red','2','12.12.2012','14.12.2012')
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `auth_key` varchar(32) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `password_reset_token` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `status` smallint(10) NOT NULL,
-  `role` int(11) NOT NULL,
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `role`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '', '$2y$13$uqe3LPW9ya3RZhynJpPN5um9fvdxUmoqjOqQBJDdIDXSKxRZB5bPu', '', '', 10, 0, 0, 0);
+
+INSERT INTO zestaw(user_id, jezyk1_id, jezyk2_id, podkategoria_id, nazwa, zestaw, ilosc_slowek, data_dodania, data_edycji) VALUES ('1','1','2','1','kolory','blue;niebieski czerwony;red','2','12.12.2012','14.12.2012');
+
