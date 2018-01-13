@@ -136,10 +136,10 @@ var showWordFunc = function showWord(wordIndex){
             $.ajax({
                 url: <?php echo '"'.Url::to(['wynik/create']).'"'  ?> ,
                 data: {
-                    'user_id' : <?php echo Yii::$app->user->id ?>,
+                    'user_id' : <?php echo '"'.Yii::$app->user->id.'"' ?>,
                     'zestaw_id' : <?php echo $model->id ?>,
                     'data_wyniku' : newDate.getFullYear()+ "-"+ (newDate.getMonth()+1) + "-" + newDate.getDate(),
-                    'wynik' : Number((answersCorrect/answersArray.length).toFixed(2))/100
+                    'wynik' : Number((answersCorrect/answersArray.length).toFixed(2))*100
                 },
                 error: function() {
                     console.log("ERROR");
