@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Zestaw;
+use common\models\Zestaw;
 
 /**
- * ZestawikSearch represents the model behind the search form about `backend\models\Zestaw`.
+ * ZestawikSearch represents the model behind the search form about `common\models\Zestaw`.
  */
-class ZestawikSearch extends Zestaw
+class ZestawSearch extends Zestaw
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class ZestawikSearch extends Zestaw
     public function rules()
     {
         return [
-            [['id', 'konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
+            [['id', 'user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
             [['nazwa', 'zestaw', 'data_dodania', 'data_edycji'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class ZestawikSearch extends Zestaw
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'konto_id' => $this->konto_id,
+            'user_id' => $this->user_id,
             'jezyk1_id' => $this->jezyk1_id,
             'jezyk2_id' => $this->jezyk2_id,
             'podkategoria_id' => $this->podkategoria_id,

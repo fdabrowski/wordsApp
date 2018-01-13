@@ -3,11 +3,15 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\User;
+use backend\models\Jezyk;
+use backend\models\Podkategoria;
 use backend\models\Zestaw;
-use backend\models\ZestawikSearch;
+use backend\models\ZestawSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * ZestawController implements the CRUD actions for Zestaw model.
@@ -35,7 +39,7 @@ class ZestawController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ZestawikSearch();
+        $searchModel = new ZestawSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,12 +69,38 @@ class ZestawController extends Controller
     {
         $model = new Zestaw();
 
+        $users = User::find()
+            ->orderBy('username')
+            ->all();
+        $users = ArrayHelper::map($users, 'id', 'username');
+        
+        $jezyk1 = Jezyk::find()
+            ->orderBy('nazwa')
+            ->all();
+        $jezyk1 = ArrayHelper::map($jezyk1, 'id', 'nazwa');
+        
+        $jezyk2 = Jezyk::find()
+            ->orderBy('nazwa')
+            ->all();
+        $jezyk2 = ArrayHelper::map($jezyk2, 'id', 'nazwa');
+        
+        $podkategorie = Podkategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
+        
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-            ]);
+                'users' => $users,
+                'jezyk1' => $jezyk1,
+                'jezyk2' => $jezyk2,
+                'podkategorie' => $podkategorie,
+            ]); 
+            
         }
     }
 
@@ -84,11 +114,35 @@ class ZestawController extends Controller
     {
         $model = $this->findModel($id);
 
+        $users = User::find()
+            ->orderBy('username')
+            ->all();
+        $users = ArrayHelper::map($users, 'id', 'username');
+        
+        $jezyk1 = Jezyk::find()
+            ->orderBy('nazwa')
+            ->all();
+        $jezyk1 = ArrayHelper::map($jezyk1, 'id', 'nazwa');
+        
+        $jezyk2 = Jezyk::find()
+            ->orderBy('nazwa')
+            ->all();
+        $jezyk2 = ArrayHelper::map($jezyk2, 'id', 'nazwa');
+        
+        $podkategorie = Podkategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'users' => $users,
+                'jezyk1' => $jezyk1,
+                'jezyk2' => $jezyk2,
+                'podkategorie' => $podkategorie,
             ]);
         }
     }

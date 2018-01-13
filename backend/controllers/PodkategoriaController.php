@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\Kategoria;
 use backend\models\Podkategoria;
 use backend\models\PodkategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * PodkategoriaController implements the CRUD actions for Podkategoria model.
@@ -65,10 +67,17 @@ class PodkategoriaController extends Controller
     {
         $model = new Podkategoria();
 
+        $kategorie = Kategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $kategorie = ArrayHelper::map($kategorie, 'id', 'nazwa');
+        
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
+                'kategorie' => $kategorie,
                 'model' => $model,
             ]);
         }
@@ -84,10 +93,16 @@ class PodkategoriaController extends Controller
     {
         $model = $this->findModel($id);
 
+        $kategorie = Kategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $kategorie = ArrayHelper::map($kategorie, 'id', 'nazwa');
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
+                'kategorie' => $kategorie,
                 'model' => $model,
             ]);
         }

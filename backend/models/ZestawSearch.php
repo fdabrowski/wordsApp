@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Konto;
+use backend\models\Zestaw;
 
 /**
- * KontoSearch represents the model behind the search form about `backend\models\Konto`.
+ * ZestawSearch represents the model behind the search form about `backend\models\Zestaw`.
  */
-class KontoSearch extends Konto
+class ZestawSearch extends Zestaw
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class KontoSearch extends Konto
     public function rules()
     {
         return [
-            [['id', 'rola_id'], 'integer'],
-            [['imie', 'nazwisko', 'email', 'login', 'haslo'], 'safe'],
+            [['id', 'user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
+            [['nazwa', 'zestaw', 'data_dodania', 'data_edycji'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class KontoSearch extends Konto
      */
     public function search($params)
     {
-        $query = Konto::find();
+        $query = Zestaw::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,17 @@ class KontoSearch extends Konto
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'rola_id' => $this->rola_id,
+            'user_id' => $this->user_id,
+            'jezyk1_id' => $this->jezyk1_id,
+            'jezyk2_id' => $this->jezyk2_id,
+            'podkategoria_id' => $this->podkategoria_id,
+            'ilosc_slowek' => $this->ilosc_slowek,
+            'data_dodania' => $this->data_dodania,
+            'data_edycji' => $this->data_edycji,
         ]);
 
-        $query->andFilterWhere(['like', 'imie', $this->imie])
-            ->andFilterWhere(['like', 'nazwisko', $this->nazwisko])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'login', $this->login])
-            ->andFilterWhere(['like', 'haslo', $this->haslo]);
+        $query->andFilterWhere(['like', 'nazwa', $this->nazwa])
+            ->andFilterWhere(['like', 'zestaw', $this->zestaw]);
 
         return $dataProvider;
     }

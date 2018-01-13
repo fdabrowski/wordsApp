@@ -34,8 +34,8 @@ class Zestaw extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'nazwa', 'zestaw', 'ilosc_slowek', 'data_dodania'], 'required'],
-            [['konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
+            [['user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'nazwa', 'zestaw', 'ilosc_slowek', 'data_dodania'], 'required'],
+            [['user_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
             [['zestaw'], 'string'],
             [['data_dodania', 'data_edycji'], 'safe'],
             [['nazwa'], 'string', 'max' => 200],

@@ -18,7 +18,7 @@ class WynikSearch extends Wynik
     public function rules()
     {
         return [
-            [['id', 'konto_id', 'zestaw_id', 'wynik'], 'integer'],
+            [['id', 'user_id', 'zestaw_id', 'wynik'], 'integer'],
             [['data_wyniku'], 'safe'],
         ];
     }

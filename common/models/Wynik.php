@@ -29,8 +29,8 @@ class Wynik extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['konto_id', 'zestaw_id', 'data_wyniku', 'wynik'], 'required'],
-            [['konto_id', 'zestaw_id', 'wynik'], 'integer'],
+            [['user_id', 'zestaw_id', 'data_wyniku', 'wynik'], 'required'],
+            [['user_id', 'zestaw_id', 'wynik'], 'integer'],
             [['data_wyniku'], 'safe'],
         ];
     }

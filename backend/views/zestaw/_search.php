@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ZestawikSearch */
+/* @var $model backend\models\ZestawSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'konto_id') ?>
+    <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'jezyk1_id') ?>
 

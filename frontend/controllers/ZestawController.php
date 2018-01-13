@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Zestaw;
-use common\models\ZestawikSearch;
+use common\models\ZestawSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class ZestawController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ZestawikSearch();
+        $searchModel = new ZestawSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

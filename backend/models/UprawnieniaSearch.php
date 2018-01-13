@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Uprawnienia;
 
 /**
- * UprawnieniaSearch represents the model behind the search form about `backend\models\Uprawnienia`.
+ * UprawnieniaSearch represents the model behind the search form of `backend\models\Uprawnienia`.
  */
 class UprawnieniaSearch extends Uprawnienia
 {
@@ -18,7 +18,7 @@ class UprawnieniaSearch extends Uprawnienia
     public function rules()
     {
         return [
-            [['konto_id', 'podkategoria_id'], 'integer'],
+            [['user_id', 'podkategoria_id'], 'integer'],
         ];
     }
 
@@ -58,7 +58,7 @@ class UprawnieniaSearch extends Uprawnienia
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'konto_id' => $this->konto_id,
+            'user_id' => $this->user_id,
             'podkategoria_id' => $this->podkategoria_id,
         ]);
 

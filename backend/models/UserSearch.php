@@ -1,16 +1,16 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Zestaw;
+use backend\models\User;
 
 /**
- * ZestawikSearch represents the model behind the search form about `common\models\Zestaw`.
+ * UserSearch represents the model behind the search form about `backend\models\User`.
  */
-class ZestawikSearch extends Zestaw
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ZestawikSearch extends Zestaw
     public function rules()
     {
         return [
-            [['id', 'konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
-            [['nazwa', 'zestaw', 'data_dodania', 'data_edycji'], 'safe'],
+            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'auth_key', 'role'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ZestawikSearch extends Zestaw
      */
     public function search($params)
     {
-        $query = Zestaw::find();
+        $query = User::find();
 
         // add conditions that should always apply here
 
@@ -60,17 +60,17 @@ class ZestawikSearch extends Zestaw
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'konto_id' => $this->konto_id,
-            'jezyk1_id' => $this->jezyk1_id,
-            'jezyk2_id' => $this->jezyk2_id,
-            'podkategoria_id' => $this->podkategoria_id,
-            'ilosc_slowek' => $this->ilosc_slowek,
-            'data_dodania' => $this->data_dodania,
-            'data_edycji' => $this->data_edycji,
+            'status' => $this->status,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'nazwa', $this->nazwa])
-            ->andFilterWhere(['like', 'zestaw', $this->zestaw]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'role', $this->role]);
 
         return $dataProvider;
     }

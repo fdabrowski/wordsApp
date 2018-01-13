@@ -11,6 +11,8 @@ use Yii;
  * @property string $nazwa
  * @property string $opis
  * @property resource $obrazek
+ *
+ * @property Podkategoria[] $podkategorias
  */
 class Kategoria extends \yii\db\ActiveRecord
 {
@@ -41,9 +43,17 @@ class Kategoria extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nazwa' => 'Nazwa',
+            'nazwa' => 'Nazwa Kategorii',
             'opis' => 'Opis',
             'obrazek' => 'Obrazek',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPodkategorias()
+    {
+        return $this->hasMany(Podkategoria::className(), ['kategoria_id' => 'id']);
     }
 }
